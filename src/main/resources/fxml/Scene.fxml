@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kil.FXMLController">
+   <children>
+      <HBox maxHeight="-Infinity" maxWidth="-Infinity" VBox.vgrow="ALWAYS">
+         <children>
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="itemNew" mnemonicParsing="false" text="New" />
+                        <MenuItem fx:id="itemOpen" mnemonicParsing="false" text="Open" />
+                        <MenuItem fx:id="itemSave" mnemonicParsing="false" text="Save" />
+                        <MenuItem fx:id="itemSaveAs" mnemonicParsing="false" text="Save as" />
+                        <MenuItem fx:id="itemExit" mnemonicParsing="false" text="Exit" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem fx:id="itemUndo" mnemonicParsing="false" text="Undo" />
+                        <MenuItem fx:id="itemRedo" mnemonicParsing="false" text="Redo" />
+                        <MenuItem fx:id="itemCut" mnemonicParsing="false" text="Cut" />
+                        <MenuItem fx:id="itemCopy" mnemonicParsing="false" text="Copy" />
+                        <MenuItem fx:id="itemPast" mnemonicParsing="false" text="Past" />
+                        <MenuItem fx:id="itemDelete" mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="itemReference" mnemonicParsing="false" text="Reference" />
+                        <MenuItem fx:id="itemAbout" mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </HBox.margin>
+            </MenuBar>
+         </children></HBox>
+      <HBox>
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonNew" mnemonicParsing="false" text="new">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonOpne" mnemonicParsing="false" text="open">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonSave" mnemonicParsing="false" text="save">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonUndo" mnemonicParsing="false" text="undo">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonRedo" mnemonicParsing="false" text="redo">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="buttonCut" mnemonicParsing="false" text="cut">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonCopy" mnemonicParsing="false" text="copy">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonPast" mnemonicParsing="false" text="paste">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </HBox>
+         </children></HBox>
+      <HBox prefWidth="900.0">
+         <children>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER" prefHeight="26.0" prefWidth="901.0">
+                     <children>
+                        <Label fx:id="labelTest" text="instruments:" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label text="Size:" />
+                        <Button fx:id="sizeMinusButton" mnemonicParsing="false" text="-" />
+                        <Slider fx:id="sizeSlider" />
+                        <Button fx:id="sizePlusButton" mnemonicParsing="false" text="+" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <SplitPane dividerPositions="0.2">
+                     <items>
+                        <ListView fx:id="listTool" />
+                        <ScrollPane>
+                           <content>
+                              <Pane fx:id="holst">
+                                 <children>
+                                    <ImageView pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../image/karta-mira.jpg" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </content>
+                        </ScrollPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </VBox>
+            <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="347.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="select language:" />
+                        <ComboBox fx:id="selectLanguageBox" minWidth="-Infinity" promptText="languages">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ComboBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </HBox>
+                  <TextArea fx:id="outPutText" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
