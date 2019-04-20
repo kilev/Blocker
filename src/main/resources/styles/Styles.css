@@ -1,3 +1,13 @@
+.component {
+    -fx-base: blue;
+    -fx-rotate: -5;
+    -fx-scale-x: 2.5;
+    -fx-scale-y: 2.5;
+}
+
 .button {
-    -fx-font-weight: bold;
+    -fx-base: blue;
+    -fx-rotate: -5;
+    -fx-scale-x: 2.5;
+    -fx-scale-y: 2.5;
 }

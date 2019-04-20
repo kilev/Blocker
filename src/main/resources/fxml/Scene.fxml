@@ -12,14 +12,12 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kil.FXMLController">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kil.controllers.FXMLController">
    <children>
       <HBox maxHeight="-Infinity" maxWidth="-Infinity" VBox.vgrow="ALWAYS">
          <children>
@@ -36,9 +34,6 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem fx:id="itemUndo" mnemonicParsing="false" text="Undo" />
-                        <MenuItem fx:id="itemRedo" mnemonicParsing="false" text="Redo" />
-                        <MenuItem fx:id="itemCut" mnemonicParsing="false" text="Cut" />
                         <MenuItem fx:id="itemCopy" mnemonicParsing="false" text="Copy" />
                         <MenuItem fx:id="itemPast" mnemonicParsing="false" text="Past" />
                         <MenuItem fx:id="itemDelete" mnemonicParsing="false" text="Delete" />
@@ -85,34 +80,17 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="buttonUndo" mnemonicParsing="false" text="undo">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="buttonRedo" mnemonicParsing="false" text="redo">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="buttonCut" mnemonicParsing="false" text="cut">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="buttonCopy" mnemonicParsing="false" text="copy">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="buttonPast" mnemonicParsing="false" text="paste">
+                  <Button fx:id="buttonPast" mnemonicParsing="false" text="past">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonDelete" mnemonicParsing="false" text="delete">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -123,9 +101,9 @@
                </HBox.margin>
             </HBox>
          </children></HBox>
-      <HBox prefWidth="900.0">
+      <HBox prefHeight="593.0" prefWidth="900.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox>
+            <VBox HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER" prefHeight="26.0" prefWidth="901.0">
                      <children>
@@ -140,27 +118,19 @@
                         <Insets bottom="5.0" left="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                  <SplitPane dividerPositions="0.2">
+                  <SplitPane dividerPositions="0.2" VBox.vgrow="ALWAYS">
                      <items>
                         <ListView fx:id="listTool" />
                         <ScrollPane>
                            <content>
-                              <Pane fx:id="holst">
-                                 <children>
-                                    <ImageView pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../image/karta-mira.jpg" />
-                                       </image>
-                                    </ImageView>
-                                 </children>
-                              </Pane>
+                              <Pane fx:id="holst" />
                            </content>
                         </ScrollPane>
                      </items>
                   </SplitPane>
                </children>
             </VBox>
-            <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="347.0">
+            <VBox alignment="TOP_CENTER" minWidth="-Infinity" prefWidth="347.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER_RIGHT">
                      <VBox.margin>
