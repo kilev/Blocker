@@ -9,8 +9,6 @@ import javafx.scene.text.Font;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Getter
@@ -26,9 +24,10 @@ public class ComBase extends MyComponent {
 
     public ComBase() {
 
+        //add start point of component
         getLocalPoints().add(new Point2D(40,60));
 
-        setDeleteRes(true);
+        setDeleteResistance(true);
         setTranslateX(20);
         setTranslateY(20);
 
@@ -99,16 +98,7 @@ public class ComBase extends MyComponent {
 
     private void setPoints(){
         for (Point2D point: getLocalPoints()) {
-            Circle circle = new Circle(point.getX(), point.getY(), 3);
-            circle.setOnMouseEntered(e->{
-                circle.setRadius(6);
-                circle.setFill(Color.RED);
-            });
-            circle.setOnMouseExited(e->{
-                circle.setRadius(3);
-                circle.setFill(Color.BLACK);
-            });
-            this.getChildren().add(circle);
+            this.getChildren().add(new MyCircle(point));
         }
     }
 }
