@@ -121,7 +121,7 @@
                   <SplitPane dividerPositions="0.2" VBox.vgrow="ALWAYS">
                      <items>
                         <ListView fx:id="listTool" />
-                        <ScrollPane>
+                        <ScrollPane fx:id="scrollPane">
                            <content>
                               <Pane fx:id="holst" />
                            </content>

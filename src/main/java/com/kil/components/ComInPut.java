@@ -1,0 +1,93 @@
+package com.kil.components;
+
+import com.kil.Logic;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.text.Font;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+
+@Getter
+@Setter
+public class ComInPut extends MyComponent {
+
+    private String alternativeText;
+
+    public ComInPut(){
+        alternativeText = "x, y";
+        setSizeY(80);
+        setSizeX(80);
+        reDraw();
+    }
+
+
+
+    @Override
+    public void reDraw() {
+        Polygon polygon = new Polygon();
+        polygon.getPoints().addAll(
+                10.0, 20.0,
+                80.0, 20.0,
+                70.0, 60.0,
+                0.0, 60.0);
+        polygon.setFill(Color.WHITE);
+        polygon.setStroke(Color.BLACK);
+
+        Label label = new Label(getAlternativeText());
+        label.setFont(new Font("Arial", 30));
+        label.setTranslateX(12);
+        label.setTranslateY(18);
+
+        Polygon polygon1 = new Polygon();
+        polygon1.getPoints().addAll(
+                40.0, 20.0,
+                35.0, 10.0,
+                45.0, 10.0);
+
+        Line line1 = new Line();
+        line1.setStartX(40.0f);
+        line1.setStartY(0.0f);
+        line1.setEndX(40.0f);
+        line1.setEndY(20.0f);
+        line1.setStrokeWidth(2);
+
+        Line line2 = new Line();
+        line2.setStartX(40.0f);
+        line2.setStartY(60.0f);
+        line2.setEndX(40.0f);
+        line2.setEndY(80.0f);
+        line2.setStrokeWidth(2);
+
+        this.getChildren().addAll(polygon, label, polygon1, line1, line2);
+    }
+
+    @Override
+    public List getCod() {
+        return Logic.getCorrectCod_inPut(alternativeText);
+    }
+
+    @Override
+    protected int computeSizeX() {
+        return getSizeX();
+    }
+
+    @Override
+    protected int computeSizeY() {
+        return getSizeY();
+    }
+
+    @Override
+    protected void drawPoints() {
+
+    }
+
+    @Override
+    protected void recombine() {
+
+    }
+}

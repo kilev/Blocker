@@ -1,5 +1,6 @@
 package com.kil.components;
 
+import com.kil.Logic;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -9,40 +10,37 @@ import javafx.scene.text.Font;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
 @Setter
 public class ComBase extends MyComponent {
 
-    private String text1 = "Start";
-    private String text2 = "End";
-
-    Pane pane1 = new Pane();
-    Pane pane2 = new Pane();
+    private String alternativeText1 = "Start";
+    private String alternativeText2 = "End";
 
 
     public ComBase() {
 
         //add start point of component
-        getLocalPoints().add(new Point2D(40,60));
+        getLocalPoints().add(new Point2D(40, 60));
 
-        setDeleteResistance(true);
-        setTranslateX(20);
-        setTranslateY(20);
+        setTranslateX(40);
 
-        draw();
-        setPoints();
-    }
-
-    private void recombine() {
-
+        reDraw();
+        drawPoints();
     }
 
 
     //drawing Component
     @Override
-    public void draw() {
+    public void reDraw() {
+        this.getChildren().clear();
+        Pane pane1 = new Pane();
+        Pane pane2 = new Pane();
+
         Ellipse ellipse1 = new Ellipse(40, 20);
         ellipse1.setFill(Color.WHITE);
         ellipse1.setStroke(Color.BLACK);
@@ -54,10 +52,9 @@ public class ComBase extends MyComponent {
         line1.setStartY(40.0f);
         line1.setEndX(40.0f);
         line1.setEndY(60.0f);
-        line1.setStroke(Color.BLACK);
         line1.setStrokeWidth(2);
 
-        Label label1 = new Label(text1);
+        Label label1 = new Label(alternativeText1);
         label1.setFont(new Font("Arial", 30));
         label1.setTranslateX(7);
 
@@ -73,10 +70,9 @@ public class ComBase extends MyComponent {
         line2.setStartY(0.0f);
         line2.setEndX(40.0f);
         line2.setEndY(20.0f);
-        line2.setStroke(Color.BLACK);
         line2.setStrokeWidth(2);
 
-        Label label2 = new Label(text2);
+        Label label2 = new Label(alternativeText2);
         label2.setFont(new Font("Arial", 30));
         label2.setTranslateX(13);
         label2.setTranslateY(20);
@@ -87,18 +83,76 @@ public class ComBase extends MyComponent {
                 35.0, 10.0,
                 45.0, 10.0);
 
+
         pane1.getChildren().addAll(ellipse1, line1, label1);
         pane2.getChildren().addAll(ellipse2, line2, label2, polygon);
-        pane2.setTranslateY(60);
 
-        this.getChildren().removeAll();
+
+        int offset = 60;
+        for (MyComponent com : getLocalContent()) {
+            com.setTranslateY(offset);
+            this.getChildren().add(com);
+            offset += com.getSizeY();
+        }
+
+        pane2.setTranslateY(offset);
+
         this.getChildren().addAll(pane1, pane2);
-        this.setPrefHeight(120);
+        this.setPrefHeight(offset + 60);
     }
 
-    private void setPoints(){
-        for (Point2D point: getLocalPoints()) {
-            this.getChildren().add(new MyCircle(point));
+
+
+    @Override
+    public void recombine() {
+
+        getLocalPoints().clear();
+        getLocalPoints().add(new Point2D(40, 60));
+
+        int offset = 0;
+        for (MyComponent com: getLocalContent()){
+            offset +=com.getSizeY();
+            getLocalPoints().add(new Point2D(40, 60 + offset));
+        }
+
+        reDraw();
+        drawPoints();
+
+    }
+
+
+    @Override
+    public List getCod() {
+        List<String> cod = new ArrayList<>();
+        cod.add(Logic.getCorrectCod_start());
+
+        for (MyComponent com : getLocalContent()) {
+            List<String> list = com.getCod();
+            for (String str : list) {
+                cod.add("\n\t" + str);
+            }
+        }
+
+        cod.add("\n" + Logic.getCorrectCod_end());
+        return cod;
+    }
+
+    @Override
+    protected int computeSizeX() {
+        return 1;
+    }
+
+    @Override
+    protected int computeSizeY() {
+        return 1;
+    }
+
+    @Override
+    protected void drawPoints() {
+        for (Point2D point : getLocalPoints()) {
+            MyCircle myCircle = new MyCircle(point);
+            myCircle.setOnMouseClicked(e -> addNew(getLocalPoints().indexOf(point)));
+            this.getChildren().add(myCircle);
         }
     }
 }
