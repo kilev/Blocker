@@ -18,6 +18,7 @@ public abstract class MyComponent extends Pane {
 
     private List<MyComponent> localContent = new ArrayList<>();
     private List<Point2D> localPoints = new ArrayList<>();
+    private MyComponent father;
 
 
     private int sizeX;
@@ -27,7 +28,7 @@ public abstract class MyComponent extends Pane {
         MyCircle(Point2D point) {
             super(point.getX(), point.getY(), 3);
             this.setOnMouseEntered(e -> {
-                this.setRadius(6);
+                this.setRadius(7);
                 this.setFill(Color.RED);
             });
             this.setOnMouseExited(e -> {
@@ -37,29 +38,41 @@ public abstract class MyComponent extends Pane {
         }
     }
 
-    MyComponent() {
-        this.setOnMouseClicked(e -> {
-            String color = "abcdef";
-            this.setStyle("-fx-background-color: #" + color);
-        });
+    MyComponent(MyComponent component) {
+        father = component;
     }
 
-    public void addNew(int index) {
+    void addNew(int index) {
         switch (Logic.currentTool) {
             case "Ввод":
-                localContent.add(index, new ComInPut());
+                localContent.add(index, new ComInPut(this));
                 break;
             case "Вывод":
-                localContent.add(index, new ComOutPut());
+                localContent.add(index, new ComOutPut(this));
+                break;
+            case "Процесс":
+                localContent.add(index, new ComFunc(this));
+                break;
+            case "Присваивание":
+                localContent.add(index, new ComAction(this));
                 break;
         }
-        this.recombine();
+        recombine();
     }
 
+    public void delete(){
+        if(father != null){
+            father.getLocalContent().remove(this);
+            father.recombine();
+        } else {
+            this.getLocalContent().clear();
+            this.recombine();
+        }
+    }
 
     protected abstract void drawPoints();
 
-    protected abstract void recombine();
+    public abstract void recombine();
 
     protected abstract void reDraw();
 
@@ -68,5 +81,9 @@ public abstract class MyComponent extends Pane {
     protected abstract int computeSizeY();
 
     public abstract List getCod();
+
+    public abstract List getAlternativeText();
+
+    public abstract void setAlternativeText(List list);
 
 }

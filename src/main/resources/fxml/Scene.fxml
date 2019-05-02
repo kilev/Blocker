@@ -32,7 +32,7 @@
                         <MenuItem fx:id="itemExit" mnemonicParsing="false" text="Exit" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Tools">
                   <items>
                         <MenuItem fx:id="itemCopy" mnemonicParsing="false" text="Copy" />
                         <MenuItem fx:id="itemPast" mnemonicParsing="false" text="Past" />
@@ -56,41 +56,14 @@
          </children></HBox>
       <HBox>
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="39.0" prefWidth="212.0">
                <children>
-                  <Button fx:id="buttonNew" mnemonicParsing="false" text="new">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="buttonOpne" mnemonicParsing="false" text="open">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="buttonSave" mnemonicParsing="false" text="save">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="buttonCopy" mnemonicParsing="false" text="copy">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="buttonPast" mnemonicParsing="false" text="past">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="buttonDelete" mnemonicParsing="false" text="delete">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonEdit" mnemonicParsing="false" text="Edit">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>

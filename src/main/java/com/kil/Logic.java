@@ -1,8 +1,9 @@
 package com.kil;
 
 
+import com.kil.components.MyComponent;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Logic {
@@ -10,7 +11,22 @@ public class Logic {
     public static String currentTool;
     public static String currentLanguage;
 
+    public static MyComponent currentCom;
 
+    public static void setCurrentCom(MyComponent com) {
+        if (currentCom == com) {
+            currentCom = null;
+            com.setStyle("");
+            return;
+        }
+
+        if (currentCom != null)
+            currentCom.setStyle("");
+        currentCom = com;
+        com.setStyle("-fx-background-color: #abcdef");
+    }
+
+    // очень много функций для получение кода указанного языка
     public static String getCorrectCod_start() {
         switch (currentLanguage) {
             case ("BASIC-256"):
@@ -37,6 +53,33 @@ public class Logic {
                 return "";
         }
         return "ERROR IN FUNC: not found language";
+    }
+
+    public static List getCorrectCod_action(String par) {
+        par = par.replace(" ", "");
+        String[] param = par.split("=");
+        List<String> result = new ArrayList<>();
+        String res = "";
+
+        switch (currentLanguage) {
+            case ("BASIC-256"):
+                res += param[0] + " = " + param[1];
+                break;
+
+            case ("C"):
+                res += param[0] + " = " + param[1] + ";";
+                break;
+
+            case ("C++"):
+                res += param[0] + " = " + param[1] + ";";
+                break;
+
+            case ("Python"):
+                res += param[0] + " = " + param[1] + ";";
+                break;
+        }
+        result.add(res);
+        return result;
     }
 
     public static List getCorrectCod_inPut(String par) {
@@ -122,8 +165,31 @@ public class Logic {
                 result.add(res);
                 break;
         }
-
         return result;
     }
 
+
+    public static List getCorrectCod_func(String par) {
+        List<String> result = new ArrayList<>();
+        String res = "";
+            switch (currentLanguage) {
+                case ("BASIC-256"):
+                    res = par;
+                    break;
+
+                case ("C"):
+                    res = par + ";";
+                    break;
+
+                case ("C++"):
+                    res = par + ";";
+                    break;
+
+                case ("Python"):
+                    res = par + ";";
+                    break;
+            }
+        result.add(res);
+        return result;
+    }
 }

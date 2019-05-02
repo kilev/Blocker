@@ -22,7 +22,8 @@ public class ComBase extends MyComponent {
     private String alternativeText2 = "End";
 
 
-    public ComBase() {
+    public ComBase(MyComponent component) {
+        super(component);
 
         //add start point of component
         getLocalPoints().add(new Point2D(40, 60));
@@ -83,6 +84,12 @@ public class ComBase extends MyComponent {
                 35.0, 10.0,
                 45.0, 10.0);
 
+        //add click listener
+        ellipse1.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+        ellipse2.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+        label1.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+        label2.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+
 
         pane1.getChildren().addAll(ellipse1, line1, label1);
         pane2.getChildren().addAll(ellipse2, line2, label2, polygon);
@@ -135,6 +142,16 @@ public class ComBase extends MyComponent {
 
         cod.add("\n" + Logic.getCorrectCod_end());
         return cod;
+    }
+
+    @Override
+    public List getAlternativeText() {
+        return null;
+    }
+
+    @Override
+    public void setAlternativeText(List list) {
+
     }
 
     @Override

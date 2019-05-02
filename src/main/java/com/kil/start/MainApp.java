@@ -1,12 +1,9 @@
-package com.kil;
+package com.kil.start;
 
-import com.kil.components.ComponentTest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -17,9 +14,6 @@ public class MainApp extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
 
         Scene scene = new Scene(root);
-
-        //scene.getStylesheets().add(Button.class.getResource("/styles/Styles.css").toExternalForm());
-        //scene.getStylesheets().add(ComponentTest.class.getResource("/styles/Styles.css").toExternalForm());
         
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);

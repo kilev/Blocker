@@ -1,15 +1,21 @@
 package com.kil.controllers;
 
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import com.kil.Logic;
-import com.kil.components.ComBase;
+import com.kil.components.*;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +23,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class FXMLController {
 
@@ -81,6 +89,9 @@ public class FXMLController {
     private Label labelTest;
 
     @FXML
+    private Button buttonEdit;
+
+    @FXML
     private Button sizeMinusButton;
 
     @FXML
@@ -93,9 +104,6 @@ public class FXMLController {
     private ListView<String> listTool;
 
     @FXML
-    private Pane holst;
-
-    @FXML
     private ComboBox<String> selectLanguageBox;
 
     @FXML
@@ -105,7 +113,6 @@ public class FXMLController {
 
     @FXML
     void initialize() {
-
         //timer for cod generation
         outPutText.setEditable(false);
         AnimationTimer timer = new AnimationTimer() {
@@ -125,10 +132,47 @@ public class FXMLController {
         //fill all lists//
         fillLists();
 
-        base = new ComBase();
+        base = new ComBase(null);
         scrollPane.setContent(base);
+
+        buttonDelete.setOnAction(actionEvent -> {
+            if (Logic.currentCom != null)
+                Logic.currentCom.delete();
+        });
+
+        buttonEdit.setOnAction(this::showDialog);
     }
 
+
+    //show window for widget refactoring
+    private void showDialog(javafx.event.ActionEvent actionEvent) {
+        if (Logic.currentCom == null)
+            return;
+
+        Parent root = null;
+        try {
+            if (Logic.currentCom instanceof ComInPut || Logic.currentCom instanceof ComOutPut || Logic.currentCom instanceof ComFunc)
+                root = FXMLLoader.load(getClass().getResource("/fxml/BasicCom.fxml"));
+            else if(Logic.currentCom instanceof ComAction)
+                root = FXMLLoader.load(getClass().getResource("/fxml/ComAction.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+        stage.show();
+    }
+
+
+    //
+    //
+    //
+    //fill lists and setup listener for them
     private void fillLists() {
         //for language
         ObservableList<String> listLanguage = FXCollections.observableArrayList("BASIC-256", "C", "C++", "Python");

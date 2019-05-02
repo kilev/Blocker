@@ -6,22 +6,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Getter
-@Setter
-public class ComInPut extends MyComponent {
+public class ComFunc extends MyComponent {
 
     private String alternativeText;
 
-    public ComInPut(MyComponent component) {
+    ComFunc(MyComponent component) {
         super(component);
-        alternativeText = "x, y";
+        alternativeText = "func()";
+
         setSizeY(80);
         setSizeX(80);
         reDraw();
@@ -29,22 +25,21 @@ public class ComInPut extends MyComponent {
 
 
     @Override
-    public void reDraw() {
+    protected void reDraw() {
+
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(
-                10.0, 20.0,
+                0.0, 20.0,
                 80.0, 20.0,
-                70.0, 60.0,
+                80.0, 60.0,
                 0.0, 60.0);
         polygon.setFill(Color.WHITE);
         polygon.setStroke(Color.BLACK);
 
-
         Label label = new Label(alternativeText);
-        label.setFont(new Font("Arial", 30));
-        label.setTranslateX(12);
-        label.setTranslateY(18);
-
+        label.setFont(new Font("Arial", 20));
+        label.setTranslateX(14);
+        label.setTranslateY(26);
 
         Polygon polygon1 = new Polygon();
         polygon1.getPoints().addAll(
@@ -69,13 +64,11 @@ public class ComInPut extends MyComponent {
         polygon.setOnMouseClicked(e-> Logic.setCurrentCom(this));
         label.setOnMouseClicked(e-> Logic.setCurrentCom(this));
 
-        this.getChildren().addAll(polygon, label, polygon1, line1, line2);
+        this.getChildren().addAll(polygon, line1, line2, polygon1, label);
     }
 
     @Override
-    public List getCod() {
-        return Logic.getCorrectCod_inPut(alternativeText);
-    }
+    public List getCod() { return Logic.getCorrectCod_func(alternativeText); }
 
     @Override
     public List getAlternativeText() {

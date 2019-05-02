@@ -7,19 +7,20 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComOutPut extends MyComponent {
 
     private String alternativeText;
 
-    ComOutPut(){
+    ComOutPut(MyComponent component){
+        super(component);
         alternativeText = "x , y";
         setSizeY(80);
         setSizeX(80);
         reDraw();
     }
-
 
 
     @Override
@@ -58,12 +59,27 @@ public class ComOutPut extends MyComponent {
         line2.setEndY(80.0f);
         line2.setStrokeWidth(2);
 
+        polygon.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+        label.setOnMouseClicked(e-> Logic.setCurrentCom(this));
+
         this.getChildren().addAll(polygon, label, polygon1, line1, line2);
     }
 
     @Override
     public List getCod() {
         return Logic.getCorrectCod_outPut(alternativeText);
+    }
+
+    @Override
+    public List getAlternativeText() {
+        List<String> result = new ArrayList<>();
+        result.add(alternativeText);
+        return result;
+    }
+
+    @Override
+    public void setAlternativeText(List list) {
+        alternativeText = list.get(0).toString();
     }
 
     @Override
@@ -82,7 +98,7 @@ public class ComOutPut extends MyComponent {
     }
 
     @Override
-    protected void recombine() {
-
+    public void recombine() {
+        reDraw();
     }
 }
