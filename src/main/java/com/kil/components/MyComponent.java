@@ -18,7 +18,6 @@ public abstract class MyComponent extends Pane {
 
     private List<MyComponent> localContent = new ArrayList<>();
     private List<Point2D> localPoints = new ArrayList<>();
-    private MyComponent father;
 
 
     private int sizeX;
@@ -38,32 +37,31 @@ public abstract class MyComponent extends Pane {
         }
     }
 
-    MyComponent(MyComponent component) {
-        father = component;
-    }
-
     void addNew(int index) {
         switch (Logic.currentTool) {
             case "Ввод":
-                localContent.add(index, new ComInPut(this));
+                localContent.add(index, new ComInPut());
                 break;
             case "Вывод":
-                localContent.add(index, new ComOutPut(this));
+                localContent.add(index, new ComOutPut());
                 break;
             case "Процесс":
-                localContent.add(index, new ComFunc(this));
+                localContent.add(index, new ComFunc());
                 break;
             case "Присваивание":
-                localContent.add(index, new ComAction(this));
+                localContent.add(index, new ComAction());
+                break;
+            case "Если...то...иначе":
+                localContent.add(index, new ComIfElse());
                 break;
         }
         recombine();
     }
 
-    public void delete(){
-        if(father != null){
-            father.getLocalContent().remove(this);
-            father.recombine();
+    public void delete() {
+        if (this.getParent() instanceof MyComponent) {
+            ((MyComponent) this.getParent()).getLocalContent().remove(this);
+            ((MyComponent) this.getParent()).recombine();
         } else {
             this.getLocalContent().clear();
             this.recombine();
@@ -76,9 +74,7 @@ public abstract class MyComponent extends Pane {
 
     protected abstract void reDraw();
 
-    protected abstract int computeSizeX();
-
-    protected abstract int computeSizeY();
+    protected abstract void computeSize();
 
     public abstract List getCod();
 

@@ -14,8 +14,7 @@ public class ComAction extends MyComponent {
 
     private String alternativeText;
 
-    ComAction(MyComponent component) {
-        super(component);
+    ComAction(){
         alternativeText = "x = 0";
         setSizeY(80);
         setSizeX(80);
@@ -82,13 +81,7 @@ public class ComAction extends MyComponent {
     }
 
     @Override
-    protected int computeSizeX() {
-        return getSizeX();
-    }
-
-    @Override
-    protected int computeSizeY() {
-        return getSizeY();
+    protected void computeSize() {
     }
 
     @Override

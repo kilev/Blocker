@@ -22,13 +22,11 @@ public class ComBase extends MyComponent {
     private String alternativeText2 = "End";
 
 
-    public ComBase(MyComponent component) {
-        super(component);
-
+    public ComBase(){
         //add start point of component
         getLocalPoints().add(new Point2D(40, 60));
 
-        setTranslateX(40);
+        setTranslateX(80);
 
         reDraw();
         drawPoints();
@@ -106,6 +104,7 @@ public class ComBase extends MyComponent {
 
         this.getChildren().addAll(pane1, pane2);
         this.setPrefHeight(offset + 60);
+        this.setPrefWidth(80);
     }
 
 
@@ -124,7 +123,6 @@ public class ComBase extends MyComponent {
 
         reDraw();
         drawPoints();
-
     }
 
 
@@ -155,13 +153,7 @@ public class ComBase extends MyComponent {
     }
 
     @Override
-    protected int computeSizeX() {
-        return 1;
-    }
-
-    @Override
-    protected int computeSizeY() {
-        return 1;
+    protected void computeSize() {
     }
 
     @Override

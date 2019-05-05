@@ -14,8 +14,7 @@ public class ComFunc extends MyComponent {
 
     private String alternativeText;
 
-    ComFunc(MyComponent component) {
-        super(component);
+    ComFunc(){
         alternativeText = "func()";
 
         setSizeY(80);
@@ -83,13 +82,7 @@ public class ComFunc extends MyComponent {
     }
 
     @Override
-    protected int computeSizeX() {
-        return getSizeX();
-    }
-
-    @Override
-    protected int computeSizeY() {
-        return getSizeY();
+    protected void computeSize() {
     }
 
     @Override

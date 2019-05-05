@@ -19,8 +19,7 @@ public class ComInPut extends MyComponent {
 
     private String alternativeText;
 
-    public ComInPut(MyComponent component) {
-        super(component);
+    public ComInPut(){
         alternativeText = "x, y";
         setSizeY(80);
         setSizeX(80);
@@ -90,13 +89,7 @@ public class ComInPut extends MyComponent {
     }
 
     @Override
-    protected int computeSizeX() {
-        return getSizeX();
-    }
-
-    @Override
-    protected int computeSizeY() {
-        return getSizeY();
+    protected void computeSize() {
     }
 
     @Override

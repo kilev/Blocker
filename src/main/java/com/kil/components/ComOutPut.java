@@ -14,8 +14,7 @@ public class ComOutPut extends MyComponent {
 
     private String alternativeText;
 
-    ComOutPut(MyComponent component){
-        super(component);
+    ComOutPut(){
         alternativeText = "x , y";
         setSizeY(80);
         setSizeX(80);
@@ -83,13 +82,7 @@ public class ComOutPut extends MyComponent {
     }
 
     @Override
-    protected int computeSizeX() {
-        return getSizeX();
-    }
-
-    @Override
-    protected int computeSizeY() {
-        return getSizeY();
+    protected void computeSize() {
     }
 
     @Override

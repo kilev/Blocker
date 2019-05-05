@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import com.kil.Logic;
 import com.kil.components.*;
+import com.sun.nio.sctp.MessageInfo;
 import javafx.animation.AnimationTimer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +23,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -132,7 +135,7 @@ public class FXMLController {
         //fill all lists//
         fillLists();
 
-        base = new ComBase(null);
+        base = new ComBase();
         scrollPane.setContent(base);
 
         buttonDelete.setOnAction(actionEvent -> {
