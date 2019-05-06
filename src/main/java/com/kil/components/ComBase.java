@@ -21,15 +21,14 @@ public class ComBase extends MyComponent {
     private String alternativeText1 = "Start";
     private String alternativeText2 = "End";
 
+    int biggestX;
+    int offsetX;
+
 
     public ComBase(){
-        //add start point of component
-        getLocalPoints().add(new Point2D(40, 60));
-
-        setTranslateX(80);
-
-        reDraw();
-        drawPoints();
+        setSizeX(80);
+        setTranslateX(20);
+        recombine();
     }
 
 
@@ -37,50 +36,57 @@ public class ComBase extends MyComponent {
     @Override
     public void reDraw() {
         this.getChildren().clear();
-        Pane pane1 = new Pane();
-        Pane pane2 = new Pane();
 
         Ellipse ellipse1 = new Ellipse(40, 20);
         ellipse1.setFill(Color.WHITE);
         ellipse1.setStroke(Color.BLACK);
-        ellipse1.setCenterX(40);
+        ellipse1.setCenterX(40 + offsetX);
         ellipse1.setCenterY(20);
 
         Line line1 = new Line();
-        line1.setStartX(40.0f);
+        line1.setStartX(40.0f + offsetX);
         line1.setStartY(40.0f);
-        line1.setEndX(40.0f);
+        line1.setEndX(40.0f + offsetX);
         line1.setEndY(60.0f);
         line1.setStrokeWidth(2);
 
         Label label1 = new Label(alternativeText1);
         label1.setFont(new Font("Arial", 30));
-        label1.setTranslateX(7);
+        label1.setTranslateX(7 + offsetX);
+
+        //draw com
+        int offsetY = 60;
+        for (MyComponent com : getLocalContent()) {
+            com.setTranslateY(offsetY);
+            com.setTranslateX((float)(biggestX/2 - com.getSizeX()/2));
+            this.getChildren().add(com);
+            offsetY += com.getSizeY();
+        }
 
 
         Ellipse ellipse2 = new Ellipse(40, 20);
         ellipse2.setFill(Color.WHITE);
         ellipse2.setStroke(Color.BLACK);
-        ellipse2.setCenterX(40);
-        ellipse2.setCenterY(40);
+        ellipse2.setCenterX(40 + offsetX);
+        ellipse2.setCenterY(40 + offsetY);
 
         Line line2 = new Line();
-        line2.setStartX(40.0f);
-        line2.setStartY(0.0f);
-        line2.setEndX(40.0f);
-        line2.setEndY(20.0f);
+        line2.setStartX(40.0f + offsetX);
+        line2.setStartY(0.0f + offsetY);
+        line2.setEndX(40.0f + offsetX);
+        line2.setEndY(20.0f + offsetY);
         line2.setStrokeWidth(2);
 
         Label label2 = new Label(alternativeText2);
         label2.setFont(new Font("Arial", 30));
-        label2.setTranslateX(13);
-        label2.setTranslateY(20);
+        label2.setTranslateX(13 + offsetX);
+        label2.setTranslateY(20 + offsetY);
 
         Polygon polygon = new Polygon();
         polygon.getPoints().addAll(
-                40.0, 20.0,
-                35.0, 10.0,
-                45.0, 10.0);
+                40.0 + offsetX, 20.0 + offsetY,
+                35.0 + offsetX, 10.0 + offsetY,
+                45.0 + offsetX, 10.0 + offsetY);
 
         //add click listener
         ellipse1.setOnMouseClicked(e-> Logic.setCurrentCom(this));
@@ -89,36 +95,22 @@ public class ComBase extends MyComponent {
         label2.setOnMouseClicked(e-> Logic.setCurrentCom(this));
 
 
-        pane1.getChildren().addAll(ellipse1, line1, label1);
-        pane2.getChildren().addAll(ellipse2, line2, label2, polygon);
-
-
-        int offset = 60;
-        for (MyComponent com : getLocalContent()) {
-            com.setTranslateY(offset);
-            this.getChildren().add(com);
-            offset += com.getSizeY();
-        }
-
-        pane2.setTranslateY(offset);
-
-        this.getChildren().addAll(pane1, pane2);
-        this.setPrefHeight(offset + 60);
-        this.setPrefWidth(80);
+        this.getChildren().addAll(ellipse1, line1, label1, ellipse2, line2, label2, polygon);
     }
 
 
 
     @Override
     public void recombine() {
+        computeSize();
 
         getLocalPoints().clear();
-        getLocalPoints().add(new Point2D(40, 60));
+        getLocalPoints().add(new Point2D(40 + offsetX, 60));
 
         int offset = 0;
         for (MyComponent com: getLocalContent()){
             offset +=com.getSizeY();
-            getLocalPoints().add(new Point2D(40, 60 + offset));
+            getLocalPoints().add(new Point2D(40 + offsetX, 60 + offset));
         }
 
         reDraw();
@@ -154,6 +146,17 @@ public class ComBase extends MyComponent {
 
     @Override
     protected void computeSize() {
+        biggestX = 80;
+        for (MyComponent component: getLocalContent()) {
+            if(component.getSizeX() > biggestX)
+                biggestX = component.getSizeX();
+        }
+        offsetX = biggestX/2 - this.getSizeX()/2;
+    }
+
+    @Override
+    protected void setPoints() {
+
     }
 
     @Override

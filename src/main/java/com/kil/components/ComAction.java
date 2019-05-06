@@ -85,6 +85,11 @@ public class ComAction extends MyComponent {
     }
 
     @Override
+    protected void setPoints() {
+
+    }
+
+    @Override
     protected void drawPoints() {
     }
 

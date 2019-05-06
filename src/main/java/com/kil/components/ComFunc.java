@@ -86,6 +86,11 @@ public class ComFunc extends MyComponent {
     }
 
     @Override
+    protected void setPoints() {
+
+    }
+
+    @Override
     protected void drawPoints() {
     }
 

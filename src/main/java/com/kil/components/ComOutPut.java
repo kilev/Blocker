@@ -86,6 +86,11 @@ public class ComOutPut extends MyComponent {
     }
 
     @Override
+    protected void setPoints() {
+
+    }
+
+    @Override
     protected void drawPoints() {
 
     }

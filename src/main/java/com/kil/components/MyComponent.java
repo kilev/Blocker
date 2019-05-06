@@ -67,6 +67,7 @@ public abstract class MyComponent extends Pane {
             this.recombine();
         }
     }
+    protected  abstract void setPoints();
 
     protected abstract void drawPoints();
 

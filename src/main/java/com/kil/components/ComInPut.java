@@ -93,6 +93,11 @@ public class ComInPut extends MyComponent {
     }
 
     @Override
+    protected void setPoints() {
+
+    }
+
+    @Override
     protected void drawPoints() {
     }
 
