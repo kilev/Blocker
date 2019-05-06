@@ -59,6 +59,13 @@ public abstract class MyComponent extends Pane {
     }
 
     public void delete() {
+        if(this.getParent() instanceof ComIfElse){
+            if(((ComIfElse) this.getParent()).getLocalContentLeft().contains(this))
+                ((ComIfElse) this.getParent()).getLocalContentLeft().remove(this);
+            else
+                ((ComIfElse) this.getParent()).getLocalContentRight().remove(this);
+        }
+
         if (this.getParent() instanceof MyComponent) {
             ((MyComponent) this.getParent()).getLocalContent().remove(this);
             ((MyComponent) this.getParent()).recombine();

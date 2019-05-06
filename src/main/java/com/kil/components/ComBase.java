@@ -27,7 +27,7 @@ public class ComBase extends MyComponent {
 
     public ComBase(){
         setSizeX(80);
-        setTranslateX(20);
+        //setTranslateX(20);
         recombine();
     }
 
@@ -103,16 +103,7 @@ public class ComBase extends MyComponent {
     @Override
     public void recombine() {
         computeSize();
-
-        getLocalPoints().clear();
-        getLocalPoints().add(new Point2D(40 + offsetX, 60));
-
-        int offset = 0;
-        for (MyComponent com: getLocalContent()){
-            offset +=com.getSizeY();
-            getLocalPoints().add(new Point2D(40 + offsetX, 60 + offset));
-        }
-
+        setPoints();
         reDraw();
         drawPoints();
     }
@@ -156,7 +147,14 @@ public class ComBase extends MyComponent {
 
     @Override
     protected void setPoints() {
+        getLocalPoints().clear();
+        getLocalPoints().add(new Point2D(40 + offsetX, 60));
 
+        int offset = 0;
+        for (MyComponent com: getLocalContent()){
+            offset +=com.getSizeY();
+            getLocalPoints().add(new Point2D(40 + offsetX, 60 + offset));
+        }
     }
 
     @Override
